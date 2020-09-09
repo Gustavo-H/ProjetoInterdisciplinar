@@ -1,4 +1,4 @@
-package br.com.car.rent.CarRent;
+package br.com.car.rent;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
