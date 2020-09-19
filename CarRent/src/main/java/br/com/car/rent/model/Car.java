@@ -11,14 +11,14 @@ public class Car  implements Serializable {
 	String model;
 	Integer brand;	
 	Integer color;
-	Integer goup;
+	Integer groupId;
 	Integer year;
 	
-	public Car(	Integer id,	String carPlate, String model, Integer brand, Integer color, Integer goup, Integer year) {
+	public Car(	Integer id,	String carPlate, String model, Integer brand, Integer color, Integer groupId, Integer year) {
 		this.setBrand(brand);
 		this.setCarPlate(carPlate);
 		this.setColor(color);
-		this.setGoup(goup);
+		this.setGroupId(groupId);
 		this.setId(id);
 		this.setModel(model);
 		this.setYear(year);
@@ -56,12 +56,12 @@ public class Car  implements Serializable {
 		this.color = color;
 	}
 
-	public Integer getGoup() {
-		return goup;
+	public Integer getGroupId() {
+		return groupId;
 	}
 
-	public void setGoup(Integer goup) {
-		this.goup = goup;
+	public void setGroupId(Integer id) {
+		this.groupId = id;
 	}
 
 	public Integer getYear() {
