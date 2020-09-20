@@ -1,15 +1,20 @@
 package br.com.car.rent.model;
 
-public class Address {
+import java.io.Serializable;
 
+public class Address implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
 	Integer id;
+	Integer ownerId;
 	String street;
 	Integer number;
 	String neighborhood;
 	String city;
 	String state;
 	String complement;
-	Integer ownerId;
+	
 
 	public Address(	Integer ownerId) {
 		this.setOwnerId(ownerId);

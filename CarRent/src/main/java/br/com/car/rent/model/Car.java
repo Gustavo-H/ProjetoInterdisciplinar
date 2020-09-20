@@ -2,7 +2,7 @@ package br.com.car.rent.model;
 
 import java.io.Serializable;
 
-public class Car  implements Serializable {
+public class Car extends DeleteManagement implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -14,15 +14,7 @@ public class Car  implements Serializable {
 	Integer groupId;
 	Integer year;
 	
-	public Car(	Integer id,	String carPlate, String model, Integer brand, Integer color, Integer groupId, Integer year) {
-		this.setBrand(brand);
-		this.setCarPlate(carPlate);
-		this.setColor(color);
-		this.setGroupId(groupId);
-		this.setId(id);
-		this.setModel(model);
-		this.setYear(year);
-	}
+	public Car() {}
 
 	public String getCarPlate() {
 		return carPlate;

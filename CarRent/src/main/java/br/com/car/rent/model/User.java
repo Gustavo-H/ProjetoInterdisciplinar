@@ -1,16 +1,18 @@
 package br.com.car.rent.model;
 
-public class User {
+import java.io.Serializable;
 
+public class User extends DeleteManagement implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
 	Integer id;
 	String login;
 	String password;
 	Integer ownerId;
 	Integer type;
 
-	public User() {
-		// TODO Auto-generated constructor stub
-	}
+	public User() {}
 	
 	public Integer getId() {
 		return id;

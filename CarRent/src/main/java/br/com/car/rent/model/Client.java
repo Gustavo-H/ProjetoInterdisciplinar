@@ -1,8 +1,12 @@
 package br.com.car.rent.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Client {
+public class Client extends DeleteManagement implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	Integer id;
 	String name;
 	String cpf;

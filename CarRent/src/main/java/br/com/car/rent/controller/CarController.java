@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.car.rent.exception.CarException;
 import br.com.car.rent.model.Car;
 import br.com.car.rent.model.ExceptionModel;
 import br.com.car.rent.model.ResponseModel;
@@ -35,31 +34,31 @@ public class CarController {
 	private static final Logger logger = LoggerFactory.getLogger(CarController.class);
 	
 	@PostMapping
-	public ResponseEntity<ResponseModel> insert(@RequestBody @Valid Car car) throws CarException, SQLException {
+	public ResponseEntity<ResponseModel> insert(@RequestBody @Valid Car car) throws SQLException {
 
 		return null;
 	}
 	
 	@PostMapping
-	public ResponseEntity<ResponseModel> update(@RequestBody @Valid Car car) throws CarException, SQLException {
+	public ResponseEntity<ResponseModel> update(@RequestBody @Valid Car car) throws SQLException {
 
 		return null;
 	}
 
 	@DeleteMapping(path="/{id}")
-	public ResponseEntity<ResponseModel> delete(@PathVariable("id") @NotBlank(message="id is required") Long id) throws CarException, SQLException {
+	public ResponseEntity<ResponseModel> delete(@PathVariable("id") @NotBlank(message="id is required") Long id) throws SQLException {
 
 		return null;
 	}
 	
 	@GetMapping
-	public ResponseEntity<ResponseModel> getById(int id) throws CarException, SQLException {
+	public ResponseEntity<ResponseModel> getById(int id) throws SQLException {
 
 		return null;
 	}
 	
 	@GetMapping
-	public ResponseEntity<ResponseModel> getByPlaca(String placa) throws CarException, SQLException {
+	public ResponseEntity<ResponseModel> getByPlaca(String placa) throws SQLException {
 
 		return null;
 	}	

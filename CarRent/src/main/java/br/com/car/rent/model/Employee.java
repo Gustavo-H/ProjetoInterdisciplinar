@@ -1,15 +1,26 @@
 package br.com.car.rent.model;
 
-public class Employee {
+import java.io.Serializable;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@CrossOrigin("http://localhost:3000")
+@RequestMapping(value="/car-rent/employees")
+
+public class Employee extends DeleteManagement implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
 	Integer id;
 	String name;
 	String serial;
 	String cpf;
 	Integer role;
 
-	public Employee() {
-		// TODO Auto-generated constructor stub
-	}
+	public Employee() {}
 
 	public Integer getId() {
 		return id;

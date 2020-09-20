@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.car.rent.exception.CarException;
+import br.com.car.rent.model.Client;
 import br.com.car.rent.model.ResponseModel;
 
 
@@ -30,15 +30,30 @@ import br.com.car.rent.model.ResponseModel;
 @RequestMapping(value="/car-rent/clients")
 
 public class ClientController {
-
-	public ResponseEntity<ResponseModel> getById() throws CarException, SQLException {
-
+	
+	@GetMapping
+	public ResponseEntity<ResponseModel> getById(int id) throws SQLException {
 		return null;
 	}
 	
-	@GetMapping
-	public ResponseEntity<ResponseModel> getById(int id) throws CarException, SQLException {
-
+	public ResponseEntity<ResponseModel> getByCPF(String cpf) throws SQLException {
 		return null;
 	}
+	
+	public ResponseEntity<ResponseModel> insert(Client client) throws SQLException {
+		return null;
+	}
+	
+	public ResponseEntity<ResponseModel> update(Client client) throws SQLException {
+		return null;
+	}
+	
+	public ResponseEntity<ResponseModel> delete(int id) throws SQLException {
+		return null;
+	}
+	
+	public ResponseEntity<ResponseModel> getAll(String name) throws SQLException {
+		return null;
+	}
+	
 }

@@ -1,12 +1,16 @@
 package br.com.car.rent.model;
 
-public class Group {
+import java.io.Serializable;
+
+public class Group extends DeleteManagement implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	Integer id;
+	String name;
 	String description;
 
-	public Group() {
-		// TODO Auto-generated constructor stub
-	}
+	public Group() {}
 
 	public Integer getId() {
 		return id;
@@ -22,5 +26,13 @@ public class Group {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }
