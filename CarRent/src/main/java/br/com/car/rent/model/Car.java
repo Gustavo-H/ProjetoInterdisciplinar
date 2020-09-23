@@ -15,7 +15,21 @@ public class Car extends DeleteManagement implements Serializable {
 	Integer year;
 	
 	public Car() {}
-
+	
+	public Car(Integer id) {
+		this.setId(id);
+	}
+	
+	public Car(Integer id, String carPlate, String model, Integer brand, Integer color, Integer groupId, Integer year) {
+		this.setBrand(brand);
+		this.setCarPlate(carPlate);
+		this.setColor(color);
+		this.setGroupId(groupId);
+		this.setId(id);
+		this.setModel(model);
+		this.setYear(year);		
+	}
+	
 	public String getCarPlate() {
 		return carPlate;
 	}

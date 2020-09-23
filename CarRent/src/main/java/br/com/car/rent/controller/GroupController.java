@@ -9,7 +9,7 @@ import br.com.car.rent.model.Group;
 import br.com.car.rent.model.ResponseModel;
 
 public class GroupController {
-	@GetMapping
+	//@GetMapping
 	public ResponseEntity<ResponseModel> getById(int id) throws SQLException {
 		return null;
 	}

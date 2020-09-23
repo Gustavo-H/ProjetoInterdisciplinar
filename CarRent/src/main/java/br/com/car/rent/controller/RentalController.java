@@ -32,7 +32,7 @@ import br.com.car.rent.model.ResponseModel;
 @RequestMapping(value="/car-rent/rents")
 
 public class RentalController {
-	@GetMapping
+	//@GetMapping
 	public ResponseEntity<ResponseModel> getById(int id) throws SQLException {
 		return null;
 	}

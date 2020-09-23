@@ -31,7 +31,7 @@ import br.com.car.rent.model.ResponseModel;
 
 public class ClientController {
 	
-	@GetMapping
+	//@GetMapping
 	public ResponseEntity<ResponseModel> getById(int id) throws SQLException {
 		return null;
 	}

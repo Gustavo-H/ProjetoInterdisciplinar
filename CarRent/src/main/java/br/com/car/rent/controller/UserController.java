@@ -30,7 +30,7 @@ import br.com.car.rent.model.ResponseModel;
 
 public class UserController {
 	
-	@GetMapping
+	//@GetMapping
 	public ResponseEntity<ResponseModel> getById(int id) throws SQLException {
 		return null;
 	}
