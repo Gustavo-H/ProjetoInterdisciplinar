@@ -2,24 +2,32 @@ package br.com.car.rent.model;
 
 import java.io.Serializable;
 
-public class Address implements Serializable{
+public class Address implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	Integer id;
-	Integer ownerId;
 	String street;
 	Integer number;
 	String neighborhood;
 	String city;
 	String state;
 	String complement;
-	
 
-	public Address(	Integer ownerId) {
-		this.setOwnerId(ownerId);
+	public Address() {
 	}
-	
+
+	public Address(Integer id, String street, Integer number, String neighborhood, String city, String state,
+			String complement) {
+		this.setCity(city);
+		this.setComplement(complement);
+		this.setId(id);
+		this.setNeighborhood(neighborhood);
+		this.setNumber(number);
+		this.setState(state);
+		this.setStreet(street);
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -74,13 +82,5 @@ public class Address implements Serializable{
 
 	public void setComplement(String complement) {
 		this.complement = complement;
-	}
-
-	public Integer getOwnerId() {
-		return ownerId;
-	}
-
-	public void setOwnerId(Integer ownerId) {
-		this.ownerId = ownerId;
 	}
 }

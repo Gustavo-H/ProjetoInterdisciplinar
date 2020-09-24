@@ -16,6 +16,20 @@ public abstract class DeleteManagement {
 	public void setIsDeleted(Boolean isDeleted) {
 		this.isDeleted = isDeleted;
 	}
+	
+	public void setIsDeleted(String isDeleted) {
+		if(isDeleted.toLowerCase() == "true")
+			this.isDeleted = true;
+		else
+			this.isDeleted = false;
+	}
+	
+	public void setIsDeleted(int isDeleted) {
+		if(isDeleted == 1)
+			this.isDeleted = true;
+		else
+			this.isDeleted = false;
+	}
 
 	public Calendar getDeletedDate() {
 		return deletedDate;

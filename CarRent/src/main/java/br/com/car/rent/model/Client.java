@@ -11,12 +11,23 @@ public class Client extends DeleteManagement implements Serializable {
 	String name;
 	String cpf;
 	String rg;
-	Date birthday;
+	String birthday;
 	Address address;
 	String contact;
 	String email;
 
-	public Client(Integer id) {
+	public Client() {
+	}
+
+	public Client(Integer id, String name, String cpf, String rg, String birthday, Address address, String contact,
+			String email) {
+		this.setAddress(address);
+		this.setBirthday(birthday);
+		this.setContact(contact);
+		this.setCpf(cpf);
+		this.setEmail(email);
+		this.setName(name);
+		this.setRg(rg);
 		this.setId(id);
 	}
 
@@ -52,11 +63,11 @@ public class Client extends DeleteManagement implements Serializable {
 		this.rg = rg;
 	}
 
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 

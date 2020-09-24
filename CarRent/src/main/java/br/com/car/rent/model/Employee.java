@@ -21,6 +21,14 @@ public class Employee extends DeleteManagement implements Serializable {
 	Integer role;
 
 	public Employee() {}
+	
+	public Employee(Integer id, String name, String serial, String cpf, Integer role) {
+		this.setCpf(cpf);
+		this.setId(id);
+		this.setName(name);
+		this.setRole(role);
+		this.setSerial(serial);
+	}
 
 	public Integer getId() {
 		return id;

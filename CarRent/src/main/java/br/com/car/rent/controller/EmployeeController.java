@@ -52,7 +52,7 @@ public class EmployeeController {
 		return null;
 	}
 	
-	public ResponseEntity<ResponseModel> getAll(String name) throws SQLException {
+	public ResponseEntity<ResponseModel> getByName(String name) throws SQLException {
 		return null;
 	}
 }

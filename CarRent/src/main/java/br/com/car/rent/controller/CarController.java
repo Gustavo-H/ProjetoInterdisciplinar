@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,57 +38,54 @@ public class CarController {
 	
 	@PostMapping
 	public ResponseEntity<ResponseModel> insert(@RequestBody @Valid Car car) throws Exception {
-		logger.info("CarController.insert() - Entering...");
 		CarFacade.insert(car);
-		logger.info("CarController.insert() - Completed");
 		HttpStatus status = HttpStatus.CREATED;
 		ResponseModel response = new ResponseModel(status.value(), "Car Successfully inserted !");
-		logger.info("CarController.insert() - Exiting");
 		return new ResponseEntity<>(response, status);		
 	}
 	
 	@GetMapping(path="/{id}")
 	public ResponseEntity<GetResponseModel<Car>> getById(@PathVariable("id") @NotBlank(message="id is required") Integer carId) throws SQLException {
-		logger.info("CarController.get() - Entering...");
 		Car car = CarFacade.getById(carId);
-		logger.info("CarController.get() - Completed");
 		HttpStatus status = HttpStatus.OK;
-		GetResponseModel<Car> response = new GetResponseModel<Car>(status.value(), "Car successfully obtained !", car);
+		GetResponseModel<Car> response = new GetResponseModel<>(status.value(), "Car successfully obtained !", car);
+		return new ResponseEntity<>(response, status);
+	}
+	
+	
+	@GetMapping(path="/plate/{carPlate}")
+	public ResponseEntity<GetResponseModel<Car>> getByCarPlate(@PathVariable("carPlate") String carPlate) throws SQLException {
+		Car car = CarFacade.getByCarPlate(carPlate);
+		HttpStatus status = HttpStatus.OK;
+		GetResponseModel<Car> response = new GetResponseModel<>(status.value(), "Car successfully obtained !", car);
 		logger.info("CarController.get() - Exiting");
-		return new ResponseEntity<GetResponseModel<Car>>(response, status);
-	}
-		
-	
-	/*/@PostMapping
-	public ResponseEntity<ResponseModel> update(@RequestBody @Valid Car car) throws SQLException {
-
-		return null;
-	}
-
-	@DeleteMapping(path="/{id}")
-	public ResponseEntity<ResponseModel> delete(@PathVariable("id") @NotBlank(message="id is required") Long id) throws SQLException {
-
-		return null;
+		return new ResponseEntity<>(response, status);
 	}
 	
-
-	
-	
-	@GetMapping(path="/{car_plate}")
-	public ResponseEntity<ResponseModel> getByCarPlate(String carPlate) throws SQLException {
-
-
-		return null;
-	}
-		
-*/
-   
-	@GetMapping
-	public ResponseEntity<ResponseModel> getByGroup(Integer groupId) throws SQLException {
-
-		return null;
+	@GetMapping(path="/group/{groupId}")
+	public ResponseEntity<GetResponseModel<List<Car>>> getByGroup(@PathVariable("groupId") @NotBlank(message="id is required") Integer groupId) throws SQLException {
+		List<Car> listCar = CarFacade.getByGroup(groupId);
+		HttpStatus status = HttpStatus.OK;
+		GetResponseModel<List<Car>> response = new GetResponseModel<>(status.value(), "Car successfully obtained !", listCar);
+		return new ResponseEntity<>(response, status);
 	}
 	
+	@PutMapping(path="/update")
+	public ResponseEntity<ResponseModel> update(@RequestBody @Valid Car car) throws Exception {
+		CarFacade.update(car);
+		HttpStatus status = HttpStatus.CREATED;
+		ResponseModel response = new ResponseModel(status.value(), "Car Successfully updated !");
+		return new ResponseEntity<>(response, status);		
+	}
+
+	@PutMapping(path="/delete")
+	public ResponseEntity<ResponseModel> delete(@RequestBody @Valid Car car) throws Exception {
+		CarFacade.delete(car);
+		HttpStatus status = HttpStatus.CREATED;
+		ResponseModel response = new ResponseModel(status.value(), "Car Successfully Deleted !");
+		return new ResponseEntity<>(response, status);		
+	}
+
 	@GetMapping(value = "/ping")
 	public ResponseEntity<String> pingApplication() {
 		return new ResponseEntity<>("Hello World !", HttpStatus.OK);
