@@ -10,7 +10,7 @@ import br.com.car.rent.model.Client;
 public class ClientService {
 	
 	private ClientDAO dao = new ClientDAO();
-
+	
 	public void insert(Client client, JdbcTemplate jdbc) {
 		dao.insert(client, jdbc);
 	}

@@ -78,6 +78,10 @@ public class Client extends DeleteManagement implements Serializable {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+	
+	public void setAddressId(Integer addressId) {
+		this.address.id = addressId;
+	}
 
 	public String getContact() {
 		return contact;

@@ -1,4 +1,4 @@
---DROP TABLES
+-- DROP TABLES
 
 DROP TABLE IF EXISTS RENTAL;
 DROP TABLE IF EXISTS USER;
@@ -7,7 +7,11 @@ DROP TABLE IF EXISTS CLIENT;
 DROP TABLE IF EXISTS ADDRESS;
 DROP TABLE IF EXISTS EMPLOYEE;
 
---CREATE TABLES
+-- DROP PROCEDURES
+
+DROP PROCEDURE IF EXISTS sp_insert_address;
+
+-- CREATE TABLES
 
 CREATE TABLE EMPLOYEE (
     id SERIAL, 
@@ -121,4 +125,11 @@ INSERT INTO USER(login, password, owner_id, type) VALUES('admin', 'admin', 1, 1)
 
 INSERT INTO EMPLOYEE(name, serial, cpf, role) VALUES('Gustavo Henrique', '001976', '123.456.789-10', 2);
 
-
+DELIMITER //
+CREATE PROCEDURE sp_insert_address(
+	IN street VARCHAR(100), IN number INT, IN neighborhood VARCHAR(80), IN city VARCHAR(30), IN state VARCHAR(20), IN complement VARCHAR(50))
+BEGIN
+	INSERT INTO ADDRESS(street, number, neighborhood, city, state, complement) VALUES (street, number, neighborhood, city, state, complement);
+   SELECT LAST_INSERT_ID() as 'id';
+END //
+DELIMITER ;

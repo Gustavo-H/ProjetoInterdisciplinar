@@ -68,7 +68,7 @@ public class ClientController {
 	@PutMapping(path="/update")
 	public ResponseEntity<ResponseModel> update(@RequestBody @Valid Client client) throws Exception {
 		ClientFacade.update(client);
-		HttpStatus status = HttpStatus.CREATED;
+		HttpStatus status = HttpStatus.OK;
 		ResponseModel response = new ResponseModel(status.value(), "Client Successfully updated !");
 		return new ResponseEntity<>(response, status);		
 	}
@@ -76,7 +76,7 @@ public class ClientController {
 	@PutMapping(path="/delete")
 	public ResponseEntity<ResponseModel> delete(@RequestBody @Valid Client client) throws Exception {
 		ClientFacade.delete(client);
-		HttpStatus status = HttpStatus.CREATED;
+		HttpStatus status = HttpStatus.OK;
 		ResponseModel response = new ResponseModel(status.value(), "Client Successfully Deleted !");
 		return new ResponseEntity<>(response, status);		
 	}

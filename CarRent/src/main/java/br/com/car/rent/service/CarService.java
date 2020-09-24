@@ -3,10 +3,8 @@ package br.com.car.rent.service;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Service;
 
 import br.com.car.rent.dao.CarDAO;
-import br.com.car.rent.dao.DAOFactory;
 import br.com.car.rent.model.Car;
 
 public class CarService {

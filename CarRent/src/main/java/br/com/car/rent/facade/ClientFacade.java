@@ -10,6 +10,7 @@ import br.com.car.rent.model.Client;
 import br.com.car.rent.service.ClientService;
 
 public class ClientFacade {
+	
 	private static ClientService clientService = new ClientService();
 	
 	public static void insert(Client client) throws SQLException {

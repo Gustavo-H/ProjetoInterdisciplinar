@@ -1,17 +1,33 @@
 package br.com.car.rent.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.InvalidResultSetAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import br.com.car.rent.model.Client;
 
 public class ClientDAO implements IClientDAO {
 
+	private AddressDAO addressDAO = new AddressDAO();
+	
 	@Override
 	public Client getById(Integer id, JdbcTemplate jdbc) {
 		ClientRowMapper mapper = new ClientRowMapper();
+		try {
 		return mapper.mapRow(jdbc.queryForRowSet("SELECT * FROM CLIENT WHERE CLIENT.id = ?",id));
+		} catch (InvalidResultSetAccessException e) {			
+			e.printStackTrace();
+			return null;
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
@@ -23,7 +39,8 @@ public class ClientDAO implements IClientDAO {
 
 	@Override
 	public void insert(Client c, JdbcTemplate jdbc) {
-		jdbc.update("INSERT INTO CLIENT(name, cpf, rg, birthday, address, contact, email) VALUES(?, ?, ?, ?, ?, ?, ?)", 
+		c.setAddressId(addressDAO.insert(c.getAddress(), jdbc));
+		jdbc.update("INSERT INTO CLIENT(name, cpf, rg, birthday, address, contact, email) VALUES(?, ?, ?, ?, ?, ?, ?)",
 				c.getName(),
 				c.getCpf(),
 				c.getRg(),
@@ -35,7 +52,8 @@ public class ClientDAO implements IClientDAO {
 
 	@Override
 	public void update(Client c, JdbcTemplate jdbc) {
-		jdbc.update("UPDATE CLIENT SET name=?, cpf=?, rg=?, birthday=?, address=?, contact=?, email=? WHERE CLIENT.id=?", 
+		addressDAO.update(c.getAddress(), jdbc);
+		jdbc.update("UPDATE CLIENT SET name=?, cpf=?, rg=?, birthday=?, address=?, contact=?, email=? WHERE CLIENT.id=?",
 				c.getName(),
 				c.getCpf(),
 				c.getRg(),
@@ -49,12 +67,23 @@ public class ClientDAO implements IClientDAO {
 	@Override
 	public Client getByCPF(String cpf, JdbcTemplate jdbc) {
 		ClientRowMapper mapper = new ClientRowMapper();
-		return mapper.mapRow(jdbc.queryForRowSet("SELECT * FROM CLIENT WHERE CLIENT.cpf = ?",cpf));
+		try {
+			return mapper.mapRow(jdbc.queryForRowSet("SELECT * FROM CLIENT WHERE CLIENT.cpf = ? AND CLIENT.is_deleted=0;",cpf));
+		} catch (InvalidResultSetAccessException e) {			
+			e.printStackTrace();
+			return null;
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
 	public List<Client> getByName(String name, JdbcTemplate jdbc) {
-		return jdbc.query("SELECT * FROM CLIENT WHERE CLIENT.name LIKE '%" + name + "%';", new ClientRowMapper());
+		return jdbc.query("SELECT * FROM CLIENT WHERE CLIENT.name LIKE '%" + name + "%' AND CLIENT.is_deleted=0;", new ClientRowMapper());
 	}
 
 }
