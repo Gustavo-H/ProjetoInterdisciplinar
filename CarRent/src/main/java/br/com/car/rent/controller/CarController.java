@@ -52,6 +52,13 @@ public class CarController {
 		return new ResponseEntity<>(response, status);
 	}
 	
+	@GetMapping(path="/all")
+	public ResponseEntity<GetResponseModel<List<Car>>> getAll() throws SQLException {
+		List<Car> listCar = CarFacade.getAll();
+		HttpStatus status = HttpStatus.OK;
+		GetResponseModel<List<Car>> response = new GetResponseModel<>(status.value(), "Car successfully obtained !", listCar);
+		return new ResponseEntity<>(response, status);
+	}
 	
 	@GetMapping(path="/plate/{carPlate}")
 	public ResponseEntity<GetResponseModel<Car>> getByCarPlate(@PathVariable("carPlate") String carPlate) throws SQLException {
