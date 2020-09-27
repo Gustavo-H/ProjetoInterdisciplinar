@@ -14,6 +14,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -77,7 +78,7 @@ public class CarController {
 		return new ResponseEntity<>(response, status);		
 	}
 
-	@PutMapping(path="/delete")
+	@PatchMapping(path="/delete")
 	public ResponseEntity<ResponseModel> delete(@RequestBody @Valid Car car) throws Exception {
 		CarFacade.delete(car);
 		HttpStatus status = HttpStatus.CREATED;

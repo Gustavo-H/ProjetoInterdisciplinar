@@ -50,7 +50,7 @@ public class ClientController {
 	
 	
 	@GetMapping(path="/cpf/{cpf}")
-	public ResponseEntity<GetResponseModel<Client>> getByClientPlate(@PathVariable("cpf") String cpf) throws SQLException {
+	public ResponseEntity<GetResponseModel<Client>> getByCpf(@PathVariable("cpf") String cpf) throws SQLException {
 		Client client = ClientFacade.getByCPF(cpf);
 		HttpStatus status = HttpStatus.OK;
 		GetResponseModel<Client> response = new GetResponseModel<>(status.value(), "Client successfully obtained !", client);
@@ -58,7 +58,7 @@ public class ClientController {
 	}
 	
 	@GetMapping(path="/name/{name}")
-	public ResponseEntity<GetResponseModel<List<Client>>> getByGroup(@PathVariable("name") String name) throws SQLException {
+	public ResponseEntity<GetResponseModel<List<Client>>> getByName(@PathVariable("name") String name) throws SQLException {
 		List<Client> listClient = ClientFacade.getByName(name);
 		HttpStatus status = HttpStatus.OK;
 		GetResponseModel<List<Client>> response = new GetResponseModel<>(status.value(), "Clients successfully obtained !", listClient);

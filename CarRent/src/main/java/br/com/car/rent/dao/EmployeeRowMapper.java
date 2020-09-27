@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.jdbc.InvalidResultSetAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
@@ -23,18 +24,17 @@ public class EmployeeRowMapper implements ResultSetExtractor<List<Employee>> {
 	}
 
 	public Employee mapRow(ResultSet rs) throws SQLException {
-		Employee e = null;
+		Employee employee = null;
 		while (rs.next()) {
-			e = new Employee(rs.getInt("id"), rs.getString("name"), rs.getString("serial"), rs.getString("cpf"),
-					rs.getInt("role"));
+			employee = new Employee(rs.getInt("id"), rs.getString("name"), rs.getString("serial"),
+					rs.getString("cpf"), rs.getInt("role"));
 		}
-		return e;
+		return employee;
 	}
 
-	public Employee mapRow(SqlRowSet rs) {
+	public Employee mapRow(SqlRowSet rs) throws InvalidResultSetAccessException, SQLException {
 		rs.next();
-		return new Employee(rs.getInt("id"), rs.getString("name"), rs.getString("serial"), rs.getString("cpf"),
-				rs.getInt("role"));
+		return new Employee(rs.getInt("id"), rs.getString("name"), rs.getString("serial"),
+				rs.getString("cpf"), rs.getInt("role"));
 	}
-
 }

@@ -7,12 +7,22 @@ public class User extends DeleteManagement implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	Integer id;
+	String name;
 	String login;
 	String password;
 	Integer ownerId;
 	Integer type;
 
 	public User() {}
+	
+	public User(Integer id, String name, String login, String password, Integer ownerId, Integer type) {
+		this.setId(id);
+		this.setName(name);
+		this.setLogin(login);
+		this.setOwnerId(ownerId);
+		this.setPassword(password);
+		this.setType(type);
+	}
 	
 	public Integer getId() {
 		return id;
@@ -52,5 +62,12 @@ public class User extends DeleteManagement implements Serializable {
 
 	public void setType(Integer type) {
 		this.type = type;
+	}
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

@@ -3,7 +3,7 @@ package br.com.car.rent.model;
 import java.io.Serializable;
 import java.util.Calendar;
 
-public class Rental implements Serializable{
+public class Rental implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -11,12 +11,23 @@ public class Rental implements Serializable{
 	Integer clientId;
 	Integer employeeId;
 	Integer carId;
+	Double discount;
 	Calendar dateWithdrawal;
 	Calendar expectedReturnDate;
 	Calendar effectiveReturnDate;
-	
-	public Rental() {
-		// TODO Auto-generated constructor stub
+
+	public Rental() {}
+
+	public Rental(Integer id, Integer clientId, Integer employeeId, Integer carId, Double discount, Calendar dateWithdrawal,
+			Calendar expectedReturnDate, Calendar effectiveReturnDate) {
+		this.setCarId(carId);
+		this.setClientId(clientId);
+		this.setDateWithdrawal(dateWithdrawal);
+		this.setEffectiveReturnDate(effectiveReturnDate);
+		this.setEmployeeId(employeeId);
+		this.setExpectedReturnDate(expectedReturnDate);
+		this.setId(carId);
+		this.setDiscount(discount);
 	}
 
 	public Integer getId() {
@@ -74,7 +85,13 @@ public class Rental implements Serializable{
 	public void setEffectiveReturnDate(Calendar effectiveReturnDate) {
 		this.effectiveReturnDate = effectiveReturnDate;
 	}
-	
-	
+
+	public Double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
 
 }

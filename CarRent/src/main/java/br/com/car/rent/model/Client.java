@@ -1,7 +1,6 @@
 package br.com.car.rent.model;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 public class Client extends DeleteManagement implements Serializable {
 

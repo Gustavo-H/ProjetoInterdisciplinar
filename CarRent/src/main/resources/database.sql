@@ -29,6 +29,7 @@ REFERENCES EMPLOYEE(ID);
 
 CREATE TABLE USER (
     id SERIAL,
+    name VARCHAR(200),
     login VARCHAR(20), 
     password VARCHAR(20),
     owner_id INT, 
@@ -50,6 +51,7 @@ CREATE TABLE CAR(
     color INT,
     group_id INT,
     year INT,
+    is_rented INT DEFAULT 0,
     is_deleted INT DEFAULT 0,
     deleted_date DATETIME,
     deleted_by INT,
@@ -97,10 +99,11 @@ CREATE TABLE RENTAL (
     id SERIAL,
     client_id INT,
     employee_id INT,
-    car_id INT, 
-    dateWithdrawal DATETIME,
-    expectedReturnDate DATETIME,
-    effectiveReturnDate DATETIME,
+    car_id INT,
+    discount FLOAT,
+    date_withdrawal DATETIME,
+    expected_return_date DATETIME,
+    effective_return_date DATETIME,
     PRIMARY KEY (ID));
 ALTER TABLE RENTAL
 ADD FOREIGN KEY (client_id) 
@@ -114,16 +117,6 @@ ALTER TABLE RENTAL
 ADD FOREIGN KEY (car_id) 
 REFERENCES CAR(ID);
 
---INITIAL CHARGE
-
-INSERT INTO CAR(car_plate, model, brand, color, group_id, year) VALUES('AAA-1111', 'VW-Fusca 1.5', 1, 2, 3, 1980);
-
-INSERT INTO ADDRESS (street, number, neighborhood, city, state, complement) VALUES ('Rua de teste', 1000, 'Vila de Teste', 'Teste', 'SP', 'Bloco AAA Apartamento 222');
-INSERT INTO CLIENT(name, cpf, rg, birthday, address, contact, email) VALUES('João da Silva', '123.456.789-10', '12.345.678', '01/01/2020', 1, '55112233445566', 'joao123@gmail.com');
-
-INSERT INTO USER(login, password, owner_id, type) VALUES('admin', 'admin', 1, 1);
-
-INSERT INTO EMPLOYEE(name, serial, cpf, role) VALUES('Gustavo Henrique', '001976', '123.456.789-10', 2);
 
 DELIMITER //
 CREATE PROCEDURE sp_insert_address(
@@ -133,3 +126,18 @@ BEGIN
    SELECT LAST_INSERT_ID() as 'id';
 END //
 DELIMITER ;
+
+
+-- INITIAL CHARGE
+
+INSERT INTO CAR(car_plate, model, brand, color, group_id, year) VALUES('AAA-1111', 'VW-Fusca 1.5', 1, 2, 3, 1980);
+
+INSERT INTO ADDRESS (street, number, neighborhood, city, state, complement) VALUES ('Rua de teste', 1000, 'Vila de Teste', 'Teste', 'SP', 'Bloco AAA Apartamento 222');
+INSERT INTO CLIENT(name, cpf, rg, birthday, address, contact, email) VALUES('João da Silva', '123.456.789-10', '12.345.678', '01/01/2020', 1, '55112233445566', 'joao123@gmail.com');
+
+INSERT INTO USER(name, login, password, owner_id, type) VALUES('Administrator','admin', 'admin', 1, 1);
+
+INSERT INTO EMPLOYEE(name, serial, cpf, role) VALUES('Gustavo Henrique', '001976', '123.456.789-10', 2);
+
+INSERT INTO RENTAL (client_id, employee_id, car_id, discount, date_withdrawal, expected_return_date, effective_return_date)
+    VALUES (1, 1, 1, 0.50, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)

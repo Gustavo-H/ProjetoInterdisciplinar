@@ -18,7 +18,7 @@ public class DAOFactory {
 	public static JdbcTemplate getConnection() throws SQLException {
 		return INSTANCE == null ? new JdbcTemplate(getDataSource()) : INSTANCE;
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	public static DataSource getDataSource() {
 		DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
