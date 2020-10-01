@@ -52,4 +52,9 @@ public class EmployeeFacade {
 		JdbcTemplate jdbc = DAOFactory.getConnection();
 		return employeeService.getByName(name, jdbc);
 	}
+	
+	public static List<Employee> getAll() throws SQLException {
+		JdbcTemplate jdbc = DAOFactory.getConnection();
+		return employeeService.getAll(jdbc);
+	}
 }
