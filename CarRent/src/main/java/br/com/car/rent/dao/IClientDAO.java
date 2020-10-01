@@ -13,4 +13,5 @@ public interface IClientDAO {
 	public void update(Client c, JdbcTemplate jdbc);
 	public Client getByCPF(String cpf, JdbcTemplate jdbc);
 	public List<Client> getByName(String name, JdbcTemplate jdbc);
+	public List<Client> getAll(JdbcTemplate jdbc);
 }

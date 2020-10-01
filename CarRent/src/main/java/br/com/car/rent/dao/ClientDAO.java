@@ -85,5 +85,10 @@ public class ClientDAO implements IClientDAO {
 	public List<Client> getByName(String name, JdbcTemplate jdbc) {
 		return jdbc.query("SELECT * FROM CLIENT WHERE CLIENT.name LIKE '%" + name + "%' AND CLIENT.is_deleted=0;", new ClientRowMapper());
 	}
+	
+	@Override
+	public List<Client> getAll(JdbcTemplate jdbc) {
+		return jdbc.query("SELECT * FROM CLIENT WHERE CLIENT.is_deleted=0;", new ClientRowMapper());
+	}
 
 }

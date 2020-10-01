@@ -36,4 +36,8 @@ public class ClientService {
 			name = "";
 		return dao.getByName(name, jdbc);
 	}
+	
+	public List<Client> getAll(JdbcTemplate jdbc) {
+		return dao.getAll(jdbc);
+	}
 }

@@ -9,7 +9,7 @@ public class AddressDAO implements IAddressDAO {
 
 	@Override
 	public Integer insert(Address a, JdbcTemplate jdbc) {
-		SqlRowSet rs = jdbc.queryForRowSet("CALL SP_INSERT_ADDRESS(?, ?, ?, ?, ?, ?); ", a.getStreet(), a.getNumber(),
+		SqlRowSet rs = jdbc.queryForRowSet("CALL SP_INSERT_ADDRESS(?, ?, ?, ?, ?, ?, ?); ", a.getCep(), a.getStreet(), a.getNumber(),
 				a.getNeighborhood(), a.getCity(), a.getState(), a.getComplement());
 		rs.next();
 		return rs.getInt("id");
@@ -27,13 +27,15 @@ public class AddressDAO implements IAddressDAO {
 			address.setNumber(rs.getInt("number"));
 			address.setState(rs.getString("state"));
 			address.setStreet(rs.getString("street"));
+			address.setCep(rs.getString("cep"));
 		}
 		return address;
 	}
 
 	@Override
 	public void update(Address a, JdbcTemplate jdbc) {
-		jdbc.update("UPDATE ADDRESS SET street=?, number=?, neighborhood=?, city=?, state=?, complement=? WHERE ADDRESS.id=?",
+		jdbc.update("UPDATE ADDRESS SET cep=?, street=?, number=?, neighborhood=?, city=?, state=?, complement=? WHERE ADDRESS.id=?",
+				a.getCep(),
 				a.getStreet(),
 				a.getNumber(),
 				a.getNeighborhood(),
