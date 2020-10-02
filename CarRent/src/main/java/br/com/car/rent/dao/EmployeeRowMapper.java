@@ -26,15 +26,16 @@ public class EmployeeRowMapper implements ResultSetExtractor<List<Employee>> {
 	public Employee mapRow(ResultSet rs) throws SQLException {
 		Employee employee = null;
 		while (rs.next()) {
-			employee = new Employee(rs.getInt("id"), rs.getString("name"), rs.getString("serial"),
-					rs.getString("cpf"), rs.getInt("role"));
+			employee = new Employee(rs.getInt("id"), rs.getString("name"), rs.getString("serial"), rs.getString("cpf"),
+					rs.getInt("role"));
 		}
 		return employee;
 	}
 
 	public Employee mapRow(SqlRowSet rs) throws InvalidResultSetAccessException, SQLException {
-		rs.next();
-		return new Employee(rs.getInt("id"), rs.getString("name"), rs.getString("serial"),
-				rs.getString("cpf"), rs.getInt("role"));
+		if (rs.next())
+			return new Employee(rs.getInt("id"), rs.getString("name"), rs.getString("serial"), rs.getString("cpf"),
+					rs.getInt("role"));
+		return new Employee();
 	}
 }
