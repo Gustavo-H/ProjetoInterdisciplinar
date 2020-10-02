@@ -34,7 +34,6 @@ import br.com.car.rent.model.ResponseModel;
 @RequestMapping(value="/car-rent/employees")
 
 public class EmployeeController {
-	private static final Logger logger = LoggerFactory.getLogger(CarController.class);
 	
 	@PostMapping
 	public ResponseEntity<ResponseModel> insert(@RequestBody @Valid Employee employee) throws Exception {
