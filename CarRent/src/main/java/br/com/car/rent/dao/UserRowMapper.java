@@ -23,8 +23,10 @@ public class UserRowMapper implements ResultSetExtractor<List<User>> {
 	}
 
 	public User mapRow(SqlRowSet rs) throws InvalidResultSetAccessException, SQLException {
-		rs.next();
-		return new User(rs.getInt("id"), rs.getString("name"), rs.getString("login"),
-				rs.getString("password"), rs.getInt("owner_id"), rs.getInt("type"));
+		if (rs.next())
+			return new User(rs.getInt("id"), rs.getString("name"), rs.getString("login"), rs.getString("password"),
+					rs.getInt("owner_id"), rs.getInt("type"));
+		else
+			return new User();
 	}
 }

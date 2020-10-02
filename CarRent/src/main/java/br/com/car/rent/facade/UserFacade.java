@@ -51,18 +51,16 @@ public class UserFacade {
 		}
 	}
 
-	public static User checkLogin(User user) throws SQLException {
-		User ret = null;
+	public static User checkLogin(User user) throws SQLException {		
 		try {
 			JdbcTemplate jdbc = DAOFactory.getConnection();
-			ret = userService.checkLogin(user, jdbc);
+			return userService.checkLogin(user, jdbc);
 		} catch (Exception e) {
-			throw new SQLException(e);
+			return new User();
 		}
-		return ret;
 	}
-
-	public static List<User> getByLogin(String name) throws SQLException {
+	
+	public static User getByLogin(String name) throws SQLException {
 		try {
 			JdbcTemplate jdbc = DAOFactory.getConnection();
 			return userService.getByLogin(name, jdbc);

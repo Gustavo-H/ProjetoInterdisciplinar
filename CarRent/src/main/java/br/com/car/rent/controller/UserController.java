@@ -57,10 +57,10 @@ public class UserController {
 	}
 	
 	@GetMapping(path="/login/{login}")
-	public ResponseEntity<GetResponseModel<List<User>>> getByLogin(@PathVariable("login") String login) throws SQLException {
-		List<User> listUser = UserFacade.getByLogin(login);
+	public ResponseEntity<GetResponseModel<User>> getByLogin(@PathVariable("login") String login) throws SQLException {
+		User user = UserFacade.getByLogin(login);
 		HttpStatus status = HttpStatus.OK;
-		GetResponseModel<List<User>> response = new GetResponseModel<>(status.value(), "Users successfully obtained !", listUser);
+		GetResponseModel<User> response = new GetResponseModel<>(status.value(), "User successfully obtained !", user);
 		return new ResponseEntity<>(response, status);
 	}
 	

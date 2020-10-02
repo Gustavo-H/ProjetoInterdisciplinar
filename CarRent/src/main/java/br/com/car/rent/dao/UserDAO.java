@@ -64,7 +64,7 @@ public class UserDAO implements IUserDAO {
 			return null;
 		}
 	}
-
+	
 	@Override
 	public List<User> getByName(String name, JdbcTemplate jdbc) {
 		return jdbc.query("SELECT * FROM USER WHERE USER.name LIKE '%" + name + "%' AND USER.is_deleted=0;",
@@ -72,7 +72,19 @@ public class UserDAO implements IUserDAO {
 	}
 
 	@Override
-	public List<User> getByLogin(String login, JdbcTemplate jdbc) {
-		return jdbc.query("SELECT * FROM USER WHERE USER.login = '" + login + "';", new UserRowMapper());
+	public User getByLogin(String login, JdbcTemplate jdbc) {
+		UserRowMapper mapper = new UserRowMapper();
+		try {
+			return mapper.mapRow(jdbc.queryForRowSet("SELECT * FROM USER WHERE USER.login = ?;", login));
+		} catch (InvalidResultSetAccessException e) {
+			e.printStackTrace();
+			return null;
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
