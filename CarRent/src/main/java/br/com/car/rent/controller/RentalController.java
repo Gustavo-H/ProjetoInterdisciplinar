@@ -27,7 +27,7 @@ import br.com.car.rent.model.ResponseModel;
 
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value="/car-rent/rents")
 
 public class RentalController {

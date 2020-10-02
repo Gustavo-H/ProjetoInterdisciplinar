@@ -30,11 +30,10 @@ import br.com.car.rent.model.ResponseModel;
 
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value="/car-rent/employees")
 
 public class EmployeeController {
-	private static final Logger logger = LoggerFactory.getLogger(CarController.class);
 	
 	@PostMapping
 	public ResponseEntity<ResponseModel> insert(@RequestBody @Valid Employee employee) throws Exception {
@@ -63,8 +62,15 @@ public class EmployeeController {
 	
 	@GetMapping(path="/name/{name}")
 	public ResponseEntity<GetResponseModel<List<Employee>>> getByName(@PathVariable("name") String name) throws SQLException {
-		logger.info("Employee getByName: " + name);
 		List<Employee> listEmployee = EmployeeFacade.getByName(name);
+		HttpStatus status = HttpStatus.OK;
+		GetResponseModel<List<Employee>> response = new GetResponseModel<>(status.value(), "Employees successfully obtained !", listEmployee);
+		return new ResponseEntity<>(response, status);
+	}
+	
+	@GetMapping(path="/all")
+	public ResponseEntity<GetResponseModel<List<Employee>>> getAll() throws SQLException {
+		List<Employee> listEmployee = EmployeeFacade.getAll();
 		HttpStatus status = HttpStatus.OK;
 		GetResponseModel<List<Employee>> response = new GetResponseModel<>(status.value(), "Employees successfully obtained !", listEmployee);
 		return new ResponseEntity<>(response, status);

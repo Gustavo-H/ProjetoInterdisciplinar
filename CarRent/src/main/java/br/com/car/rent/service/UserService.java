@@ -31,7 +31,7 @@ public class UserService {
 		return dao.checkLogin(user, jdbc);
 	}
 	
-	public List<User> getByLogin(String login, JdbcTemplate jdbc) {
+	public User getByLogin(String login, JdbcTemplate jdbc) {
 		return dao.getByLogin(login, jdbc);
 	}
 	

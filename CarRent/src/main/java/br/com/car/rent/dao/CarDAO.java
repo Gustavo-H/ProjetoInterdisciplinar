@@ -54,4 +54,9 @@ public class CarDAO implements ICarDAO {
 	public List<Car> getByGroup(Integer groupId, JdbcTemplate jdbc) {
 		return jdbc.query("SELECT * FROM CAR WHERE car.group_id = " + groupId + " AND is_deleted=0", new CarRowMapper());
 	}
+	
+	@Override
+	public List<Car> getAll(JdbcTemplate jdbc) {
+		return jdbc.query("SELECT * FROM CAR WHERE is_deleted=0", new CarRowMapper());
+	}
 }

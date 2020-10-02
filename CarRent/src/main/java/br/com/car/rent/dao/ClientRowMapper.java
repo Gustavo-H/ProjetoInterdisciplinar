@@ -37,9 +37,10 @@ public class ClientRowMapper implements ResultSetExtractor<List<Client>> {
 	}
 
 	public Client mapRow(SqlRowSet rs) throws InvalidResultSetAccessException, SQLException {
-		rs.next();
+		if(rs.next())
 		return new Client(rs.getInt("id"), rs.getString("name"), rs.getString("cpf"), rs.getString("rg"),
 				rs.getString("birthday"), getAddress(rs.getInt("address")), rs.getString("contact"), rs.getString("email"));
+		return new Client();
 	}
 	
 	private Address getAddress(Integer id) throws SQLException {

@@ -12,6 +12,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -27,7 +28,7 @@ import br.com.car.rent.model.ResponseModel;
 
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value="/car-rent/clients")
 
 public class ClientController {
@@ -65,6 +66,14 @@ public class ClientController {
 		return new ResponseEntity<>(response, status);
 	}
 	
+	@GetMapping(path="/all")
+	public ResponseEntity<GetResponseModel<List<Client>>> getAll() throws SQLException {
+		List<Client> listClient = ClientFacade.getAll();
+		HttpStatus status = HttpStatus.OK;
+		GetResponseModel<List<Client>> response = new GetResponseModel<>(status.value(), "Clients successfully obtained !", listClient);
+		return new ResponseEntity<>(response, status);
+	}
+	
 	@PutMapping(path="/update")
 	public ResponseEntity<ResponseModel> update(@RequestBody @Valid Client client) throws Exception {
 		ClientFacade.update(client);
@@ -73,7 +82,7 @@ public class ClientController {
 		return new ResponseEntity<>(response, status);		
 	}
 
-	@PutMapping(path="/delete")
+	@PatchMapping(path="/delete")
 	public ResponseEntity<ResponseModel> delete(@RequestBody @Valid Client client) throws Exception {
 		ClientFacade.delete(client);
 		HttpStatus status = HttpStatus.OK;

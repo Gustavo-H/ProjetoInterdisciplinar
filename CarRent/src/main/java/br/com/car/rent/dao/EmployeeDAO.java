@@ -75,5 +75,9 @@ public class EmployeeDAO implements IEmployeeDAO{
 	public List<Employee> getByName(String name, JdbcTemplate jdbc) {
 		return jdbc.query("SELECT * FROM EMPLOYEE WHERE EMPLOYEE.name like '%" + name + "%' AND EMPLOYEE.is_deleted=0;", new EmployeeRowMapper());
 	}
-
+	
+	@Override
+	public List<Employee> getAll(JdbcTemplate jdbc) {
+		return jdbc.query("SELECT * FROM EMPLOYEE WHERE EMPLOYEE.is_deleted=0;", new EmployeeRowMapper());
+	}
 }

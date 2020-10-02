@@ -12,6 +12,6 @@ public interface IUserDAO {
 	public void delete(User user, JdbcTemplate jdbc);
 	public void insert(User user, JdbcTemplate jdbc);	
 	public void update(User user, JdbcTemplate jdbc);
-	public List<User> getByLogin(String login, JdbcTemplate jdbc);
+	public User getByLogin(String login, JdbcTemplate jdbc);
 	public List<User> getByName(String name, JdbcTemplate jdbc);
 }

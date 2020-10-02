@@ -16,4 +16,5 @@ public interface IEmployeeDAO {
 	public void update(Employee e, JdbcTemplate jdbc);
 	public Employee getByCPF(String cpf, JdbcTemplate jdbc);
 	public List<Employee> getByName(String name, JdbcTemplate jdbc);
+	public List<Employee> getAll(JdbcTemplate jdbc);
 }

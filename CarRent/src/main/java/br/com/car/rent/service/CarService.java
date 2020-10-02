@@ -31,6 +31,10 @@ public class CarService {
 		return dao.getByGroup(groupId, jdbc);
 	}
 	
+	public List<Car> getAll(JdbcTemplate jdbc) {
+		return dao.getAll(jdbc);
+	}
+		
 	public Car getByCarPlate(String carPlate, JdbcTemplate jdbc) {
 		return dao.getByCarPlate(carPlate, jdbc);
 	}

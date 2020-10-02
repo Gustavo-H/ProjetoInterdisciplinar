@@ -29,7 +29,7 @@ import br.com.car.rent.model.GetResponseModel;
 import br.com.car.rent.model.ResponseModel;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/car-rent/cars")
 
 public class CarController {
@@ -52,6 +52,13 @@ public class CarController {
 		return new ResponseEntity<>(response, status);
 	}
 	
+	@GetMapping(path="/all")
+	public ResponseEntity<GetResponseModel<List<Car>>> getAll() throws SQLException {
+		List<Car> listCar = CarFacade.getAll();
+		HttpStatus status = HttpStatus.OK;
+		GetResponseModel<List<Car>> response = new GetResponseModel<>(status.value(), "Car successfully obtained !", listCar);
+		return new ResponseEntity<>(response, status);
+	}
 	
 	@GetMapping(path="/plate/{carPlate}")
 	public ResponseEntity<GetResponseModel<Car>> getByCarPlate(@PathVariable("carPlate") String carPlate) throws SQLException {

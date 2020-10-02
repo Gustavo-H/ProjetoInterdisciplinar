@@ -7,6 +7,7 @@ public class Address implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	Integer id;
+	String cep;
 	String street;
 	Integer number;
 	String neighborhood;
@@ -17,7 +18,7 @@ public class Address implements Serializable {
 	public Address() {
 	}
 
-	public Address(Integer id, String street, Integer number, String neighborhood, String city, String state,
+	public Address(Integer id, String cep, String street, Integer number, String neighborhood, String city, String state,
 			String complement) {
 		this.setCity(city);
 		this.setComplement(complement);
@@ -26,6 +27,7 @@ public class Address implements Serializable {
 		this.setNumber(number);
 		this.setState(state);
 		this.setStreet(street);
+		this.setCep(cep);
 	}
 
 	public Integer getId() {
@@ -82,5 +84,13 @@ public class Address implements Serializable {
 
 	public void setComplement(String complement) {
 		this.complement = complement;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 }

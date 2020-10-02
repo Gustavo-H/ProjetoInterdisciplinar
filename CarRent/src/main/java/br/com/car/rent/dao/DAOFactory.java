@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class DAOFactory {
 	
 	private static final String URL  = "jdbc:mysql://localhost:3306/carrent_db?useTimezone=true&serverTimezone=UTC";
-	private static final String USERNAME = "root";
+	private static final String USERNAME = "carrentUser";
 	private static final String PASSWORD = "senh@";
 	
 	private static JdbcTemplate INSTANCE;

@@ -31,9 +31,12 @@ public class EmployeeService {
 		return dao.getByCPF(cpf, jdbc);
 	}
 
-	public List<Employee> getByName(String name, JdbcTemplate jdbc) {
-		if (name == null)
-			name = "";
+	public List<Employee> getByName(String name, JdbcTemplate jdbc) {	
 		return dao.getByName(name, jdbc);
 	}
+	
+	public List<Employee> getAll(JdbcTemplate jdbc) {	
+		return dao.getAll(jdbc);
+	}
+	
 }
