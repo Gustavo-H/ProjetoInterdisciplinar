@@ -14,7 +14,7 @@ DROP PROCEDURE IF EXISTS sp_insert_address;
 -- CREATE TABLES
 
 CREATE TABLE EMPLOYEE (
-    id SERIAL, 
+    id INT AUTO_INCREMENT, 
     name VARCHAR(200),
     serial VARCHAR(20), 
     cpf VARCHAR(14),
@@ -28,7 +28,7 @@ ADD FOREIGN KEY (deleted_by)
 REFERENCES EMPLOYEE(ID);
 
 CREATE TABLE USER (
-    id SERIAL,
+    id INT AUTO_INCREMENT,
     name VARCHAR(200),
     login VARCHAR(20), 
     password VARCHAR(20),
@@ -44,7 +44,7 @@ REFERENCES EMPLOYEE(ID);
 
 
 CREATE TABLE CAR(
-    id SERIAL,
+    id INT AUTO_INCREMENT,
     car_plate VARCHAR(10),
     model VARCHAR(50),
     brand INT,
@@ -63,7 +63,7 @@ REFERENCES EMPLOYEE(ID);
 
 
 CREATE TABLE ADDRESS (
-    id SERIAL,
+    id INT AUTO_INCREMENT,
 	cep VARCHAR(9),
     street VARCHAR(100),
     number INT,
@@ -75,7 +75,7 @@ CREATE TABLE ADDRESS (
 
 
 CREATE TABLE CLIENT (
-    id SERIAL, 
+    id INT AUTO_INCREMENT, 
     name VARCHAR(200),
     cpf VARCHAR(14),
     rg VARCHAR(15),
@@ -97,7 +97,7 @@ REFERENCES ADDRESS(ID);
 
 
 CREATE TABLE RENTAL (
-    id SERIAL,
+    id INT AUTO_INCREMENT,
     client_id INT,
     employee_id INT,
     car_id INT,
