@@ -1,7 +1,6 @@
 package br.com.car.rent.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
 
 public class Rental implements Serializable {
 
@@ -12,22 +11,24 @@ public class Rental implements Serializable {
 	Integer employeeId;
 	Integer carId;
 	Double discount;
-	Calendar dateWithdrawal;
-	Calendar expectedReturnDate;
-	Calendar effectiveReturnDate;
+	Double dailyCost;
+	String dateWithdrawal;
+	String expectedReturnDate;
+	String effectiveReturnDate;
 
 	public Rental() {}
 
-	public Rental(Integer id, Integer clientId, Integer employeeId, Integer carId, Double discount, Calendar dateWithdrawal,
-			Calendar expectedReturnDate, Calendar effectiveReturnDate) {
+	public Rental(Integer id, Integer clientId, Integer employeeId, Integer carId, Double discount, Double dailyCost,
+			String dateWithdrawal, String expectedReturnDate, String effectiveReturnDate) {
 		this.setCarId(carId);
 		this.setClientId(clientId);
 		this.setDateWithdrawal(dateWithdrawal);
 		this.setEffectiveReturnDate(effectiveReturnDate);
 		this.setEmployeeId(employeeId);
 		this.setExpectedReturnDate(expectedReturnDate);
-		this.setId(carId);
+		this.setId(id);
 		this.setDiscount(discount);
+		this.setDailyCost(dailyCost);
 	}
 
 	public Integer getId() {
@@ -62,27 +63,27 @@ public class Rental implements Serializable {
 		this.carId = carId;
 	}
 
-	public Calendar getDateWithdrawal() {
+	public String getDateWithdrawal() {
 		return dateWithdrawal;
 	}
 
-	public void setDateWithdrawal(Calendar dateWithdrawal) {
+	public void setDateWithdrawal(String dateWithdrawal) {
 		this.dateWithdrawal = dateWithdrawal;
 	}
 
-	public Calendar getExpectedReturnDate() {
+	public String getExpectedReturnDate() {
 		return expectedReturnDate;
 	}
 
-	public void setExpectedReturnDate(Calendar expectedReturnDate) {
+	public void setExpectedReturnDate(String expectedReturnDate) {
 		this.expectedReturnDate = expectedReturnDate;
 	}
 
-	public Calendar getEffectiveReturnDate() {
+	public String getEffectiveReturnDate() {
 		return effectiveReturnDate;
 	}
 
-	public void setEffectiveReturnDate(Calendar effectiveReturnDate) {
+	public void setEffectiveReturnDate(String effectiveReturnDate) {
 		this.effectiveReturnDate = effectiveReturnDate;
 	}
 
@@ -92,6 +93,14 @@ public class Rental implements Serializable {
 
 	public void setDiscount(Double discount) {
 		this.discount = discount;
+	}
+
+	public Double getDailyCost() {
+		return dailyCost;
+	}
+
+	public void setDailyCost(Double dailyCost) {
+		this.dailyCost = dailyCost;
 	}
 
 }
