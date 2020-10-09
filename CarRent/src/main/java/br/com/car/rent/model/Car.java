@@ -11,8 +11,9 @@ public class Car extends DeleteManagement implements Serializable {
 	String model;
 	Integer brand;	
 	Integer color;
-	Integer groupId;
+	Integer group;
 	Integer year;
+	Double rentPrice;
 	
 	public Car() {}
 	
@@ -20,14 +21,15 @@ public class Car extends DeleteManagement implements Serializable {
 		this.setId(id);
 	}
 	
-	public Car(Integer id, String carPlate, String model, Integer brand, Integer color, Integer groupId, Integer year) {
+	public Car(Integer id, String carPlate, String model, Integer brand, Integer color, Integer group, Integer year, Double rentPrice) {
 		this.setBrand(brand);
 		this.setCarPlate(carPlate);
 		this.setColor(color);
-		this.setGroupId(groupId);
+		this.setGroup(group);
 		this.setId(id);
 		this.setModel(model);
-		this.setYear(year);		
+		this.setYear(year);
+		this.setRentPrice(rentPrice);
 	}
 	
 	public String getCarPlate() {
@@ -62,12 +64,12 @@ public class Car extends DeleteManagement implements Serializable {
 		this.color = color;
 	}
 
-	public Integer getGroupId() {
-		return groupId;
+	public Integer getGroup() {
+		return group;
 	}
 
-	public void setGroupId(Integer id) {
-		this.groupId = id;
+	public void setGroup(Integer id) {
+		this.group = id;
 	}
 
 	public Integer getYear() {
@@ -83,5 +85,13 @@ public class Car extends DeleteManagement implements Serializable {
 	}
 	public Integer getId() {
 		return this.id;
+	}
+
+	public Double getRentPrice() {
+		return rentPrice;
+	}
+
+	public void setRentPrice(Double rentPrice) {
+		this.rentPrice = rentPrice;
 	}
 }

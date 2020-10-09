@@ -17,23 +17,17 @@ public class CarRowMapper implements ResultSetExtractor<List<Car>> {
 		List<Car> listCar = new ArrayList<>();
 		while (rs.next()) {
 			listCar.add(new Car(rs.getInt("id"), rs.getString("car_plate"), rs.getString("model"), rs.getInt("brand"),
-					rs.getInt("color"), rs.getInt("group_id"), rs.getInt("year")));
+					rs.getInt("color"), rs.getInt("group_id"), rs.getInt("year"), rs.getDouble("rent_price")));
 		}
 		return listCar;
 	}
 
-	public Car mapRow(ResultSet rs) throws SQLException {
-		Car car = null;
-		while (rs.next()) {
-			car = new Car(rs.getInt("id"), rs.getString("car_plate"), rs.getString("model"), rs.getInt("brand"),
-					rs.getInt("color"), rs.getInt("group_id"), rs.getInt("year"));
-		}
-		return car;
-	}
-
 	public Car mapRow(SqlRowSet rs) {
-		rs.next();
-		return new Car(rs.getInt("id"), rs.getString("car_plate"), rs.getString("model"), rs.getInt("brand"),
-					rs.getInt("color"), rs.getInt("group_id"), rs.getInt("year"));
+
+		if (rs.next())
+			return new Car(rs.getInt("id"), rs.getString("car_plate"), rs.getString("model"), rs.getInt("brand"),
+					rs.getInt("color"), rs.getInt("group_id"), rs.getInt("year"), rs.getDouble("rent_price"));
+		else
+			return new Car();
 	}
 }

@@ -23,24 +23,26 @@ public class CarDAO implements ICarDAO {
 	
 	@Override
 	public void insert(Car c, JdbcTemplate jdbc) {
-		jdbc.update("INSERT INTO CAR(car_plate, model, brand, color, group_id, year) VALUES(?, ?, ?, ?, ?, ?)", 
+		jdbc.update("INSERT INTO CAR(car_plate, model, brand, color, group_id, year, rent_price) VALUES(?, ?, ?, ?, ?, ?, ?", 
 				c.getCarPlate(),
 				c.getModel(),
 				c.getBrand(),
 				c.getColor(),
-				c.getGroupId(),
-				c.getYear());
+				c.getGroup(),
+				c.getYear(),
+				c.getRentPrice());
 	}
 
 	@Override
 	public void update(Car c, JdbcTemplate jdbc) {
-		jdbc.update("UPDATE CAR SET car_plate=?, model=?, brand=?, color=?, group_id=?, year=? WHERE car.id=?", 
+		jdbc.update("UPDATE CAR SET car_plate=?, model=?, brand=?, color=?, group_id=?, year=?, rent_price=? WHERE car.id=?", 
 				c.getCarPlate(),
 				c.getModel(),
 				c.getBrand(),
 				c.getColor(),
-				c.getGroupId(),
+				c.getGroup(),
 				c.getYear(),
+				c.getRentPrice(),
 				c.getId());	
 	}
 
