@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import br.com.car.rent.dao.DAOFactory;
+import br.com.car.rent.model.HomePage;
 import br.com.car.rent.model.Rental;
 import br.com.car.rent.model.RentalDTO;
 import br.com.car.rent.service.RentalService;
@@ -37,6 +38,16 @@ public class RentalFacade {
 		try {
 			JdbcTemplate jdbc = DAOFactory.getConnection();
 			ret = rentalService.getById(rentalId, jdbc);
+		} catch (Exception e) {
+			throw new SQLException(e);
+		}
+		return ret;
+	}
+	
+	public static HomePage getHomePageContent() throws SQLException {
+		HomePage ret = null;
+		try {		
+			ret = rentalService.getHomePageContent();
 		} catch (Exception e) {
 			throw new SQLException(e);
 		}

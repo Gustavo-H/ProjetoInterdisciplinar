@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.car.rent.facade.RentalFacade;
 import br.com.car.rent.model.ExceptionModel;
 import br.com.car.rent.model.GetResponseModel;
+import br.com.car.rent.model.HomePage;
 import br.com.car.rent.model.Rental;
 import br.com.car.rent.model.RentalDTO;
 import br.com.car.rent.model.ResponseModel;
@@ -49,11 +50,19 @@ public class RentalController {
 		return new ResponseEntity<>(response, status);
 	}
 	
-	@GetMapping(path="return/{id}")
+	@GetMapping(path="/return/{id}")
 	public ResponseEntity<GetResponseModel<Rental>> setReturnDate(@PathVariable("id") @NotBlank(message="id is required") Integer rentalId) throws SQLException {
 		RentalFacade.setReturnDate(rentalId);
 		HttpStatus status = HttpStatus.OK;
 		GetResponseModel<Rental> response = new GetResponseModel<>(status.value(), "Rental successfully obtained !", new Rental());
+		return new ResponseEntity<>(response, status);
+	}
+	
+	@GetMapping(path="/homepage")
+	public ResponseEntity<GetResponseModel<HomePage>> getHomePageContent() throws SQLException {
+		HomePage home = RentalFacade.getHomePageContent();
+		HttpStatus status = HttpStatus.OK;
+		GetResponseModel<HomePage> response = new GetResponseModel<>(status.value(), "Rental successfully obtained !", home);
 		return new ResponseEntity<>(response, status);
 	}
 		
