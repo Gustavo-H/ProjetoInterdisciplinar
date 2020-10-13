@@ -10,6 +10,7 @@ DROP TABLE IF EXISTS EMPLOYEE;
 -- DROP PROCEDURES
 
 DROP PROCEDURE IF EXISTS sp_insert_address;
+DROP PROCEDURE IF EXISTS sp_insert_rental;
 
 -- CREATE TABLES
 
@@ -120,6 +121,7 @@ ALTER TABLE RENTAL
 ADD FOREIGN KEY (car_id) 
 REFERENCES CAR(ID);
 
+-- CREATE PROCEDURES
 
 DELIMITER //
 CREATE PROCEDURE sp_insert_address(
@@ -127,6 +129,16 @@ CREATE PROCEDURE sp_insert_address(
 BEGIN
 	INSERT INTO ADDRESS(cep, street, number, neighborhood, city, state, complement) VALUES (cep, street, number, neighborhood, city, state, complement);
    SELECT LAST_INSERT_ID() as 'id';
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE sp_insert_rental(
+	IN client_id INT, employee_id INT, car_id INT, discount FLOAT, daily_cost FLOAT, expected_return_date DATETIME)
+BEGIN
+	INSERT INTO RENTAL(client_id, employee_id, car_id, daily_cost, discount, date_withdrawal, expected_return_date) 
+    	VALUES (client_id, employee_id, car_id, daily_cost, discount, CURRENT_TIMESTAMP, expected_return_date);
+    UPDATE CAR SET is_rented=1 WHERE CAR.id = car_id
 END //
 DELIMITER ;
 
