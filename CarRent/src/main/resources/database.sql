@@ -10,6 +10,7 @@ DROP TABLE IF EXISTS EMPLOYEE;
 -- DROP PROCEDURES
 
 DROP PROCEDURE IF EXISTS sp_insert_address;
+DROP PROCEDURE IF EXISTS sp_insert_rental;
 
 -- CREATE TABLES
 
@@ -51,6 +52,7 @@ CREATE TABLE CAR(
     color INT,
     group_id INT,
     year INT,
+	rent_price float,
     is_rented INT DEFAULT 0,
     is_deleted INT DEFAULT 0,
     deleted_date DATETIME,
@@ -102,6 +104,7 @@ CREATE TABLE RENTAL (
     employee_id INT,
     car_id INT,
     discount FLOAT,
+	daily_cost FLOAT,
     date_withdrawal DATETIME,
     expected_return_date DATETIME,
     effective_return_date DATETIME,
@@ -118,6 +121,7 @@ ALTER TABLE RENTAL
 ADD FOREIGN KEY (car_id) 
 REFERENCES CAR(ID);
 
+-- CREATE PROCEDURES
 
 DELIMITER //
 CREATE PROCEDURE sp_insert_address(
@@ -128,10 +132,20 @@ BEGIN
 END //
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE sp_insert_rental(
+	IN client_id INT, employee_id INT, car_id INT, discount FLOAT, daily_cost FLOAT, expected_return_date DATETIME)
+BEGIN
+	INSERT INTO RENTAL(client_id, employee_id, car_id, daily_cost, discount, date_withdrawal, expected_return_date) 
+    	VALUES (client_id, employee_id, car_id, daily_cost, discount, CURRENT_TIMESTAMP, expected_return_date);
+    UPDATE CAR SET is_rented=1 WHERE CAR.id = car_id
+END //
+DELIMITER ;
+
 
 -- INITIAL CHARGE
 
-INSERT INTO CAR(car_plate, model, brand, color, group_id, year) VALUES('AAA-1111', 'VW-Fusca 1.5', 1, 2, 3, 1980);
+INSERT INTO CAR(car_plate, model, brand, color, group_id, rent_price, year) VALUES('AAA-1111', 'VW-Fusca 1.5', 1, 2, 3, 100.00, 1980);
 
 INSERT INTO ADDRESS (cep, street, number, neighborhood, city, state, complement) VALUES ('13033-205', 'Rua de teste', 1000, 'Vila de Teste', 'Teste', 'SP', 'Bloco AAA Apartamento 222');
 INSERT INTO CLIENT(name, cpf, rg, birthday, address, contact, email) VALUES('João da Silva', '123.456.789-10', '12.345.678', '01/01/2020', 1, '55112233445566', 'joao123@gmail.com');
@@ -140,5 +154,5 @@ INSERT INTO USER(name, login, password, owner_id, type) VALUES('Administrator','
 
 INSERT INTO EMPLOYEE(name, serial, cpf, role) VALUES('Gustavo Henrique', '001976', '123.456.789-10', 2);
 
-INSERT INTO RENTAL (client_id, employee_id, car_id, discount, date_withdrawal, expected_return_date, effective_return_date)
-    VALUES (1, 1, 1, 0.50, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+INSERT INTO RENTAL (client_id, employee_id, car_id, daily_cost, discount, date_withdrawal, expected_return_date, effective_return_date)
+    VALUES (1, 1, 1, 100.50, 0.50, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)

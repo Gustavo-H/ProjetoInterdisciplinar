@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.car.rent.facade.RentalFacade;
 import br.com.car.rent.model.ExceptionModel;
 import br.com.car.rent.model.GetResponseModel;
+import br.com.car.rent.model.HomePage;
 import br.com.car.rent.model.Rental;
+import br.com.car.rent.model.RentalDTO;
 import br.com.car.rent.model.ResponseModel;
 
 
@@ -47,12 +49,44 @@ public class RentalController {
 		GetResponseModel<Rental> response = new GetResponseModel<>(status.value(), "Rental successfully obtained !", rental);
 		return new ResponseEntity<>(response, status);
 	}
+	
+	@GetMapping(path="/return/{id}")
+	public ResponseEntity<GetResponseModel<Rental>> setReturnDate(@PathVariable("id") @NotBlank(message="id is required") Integer rentalId) throws SQLException {
+		RentalFacade.setReturnDate(rentalId);
+		HttpStatus status = HttpStatus.OK;
+		GetResponseModel<Rental> response = new GetResponseModel<>(status.value(), "Rental successfully obtained !", new Rental());
+		return new ResponseEntity<>(response, status);
+	}
+	
+	@GetMapping(path="/homepage")
+	public ResponseEntity<GetResponseModel<HomePage>> getHomePageContent() throws SQLException {
+		HomePage home = RentalFacade.getHomePageContent();
+		HttpStatus status = HttpStatus.OK;
+		GetResponseModel<HomePage> response = new GetResponseModel<>(status.value(), "Rental successfully obtained !", home);
+		return new ResponseEntity<>(response, status);
+	}
 		
 	@GetMapping(path="/employee/{id}")
 	public ResponseEntity<GetResponseModel<List<Rental>>> getByEmployee(@PathVariable("id") Integer id) throws SQLException {
 		List<Rental> listRental = RentalFacade.getByEmployee(id);
 		HttpStatus status = HttpStatus.OK;
 		GetResponseModel<List<Rental>> response = new GetResponseModel<>(status.value(), "Rents successfully obtained !", listRental);
+		return new ResponseEntity<>(response, status);
+	}
+	
+	@GetMapping(path="/open")
+	public ResponseEntity<GetResponseModel<List<RentalDTO>>> getOpen() throws SQLException {
+		List<RentalDTO> listRental = RentalFacade.getOpen();
+		HttpStatus status = HttpStatus.OK;
+		GetResponseModel<List<RentalDTO>> response = new GetResponseModel<>(status.value(), "Rents successfully obtained !", listRental);
+		return new ResponseEntity<>(response, status);
+	}
+	
+	@GetMapping(path="/closed")
+	public ResponseEntity<GetResponseModel<List<RentalDTO>>> getClosed() throws SQLException {
+		List<RentalDTO> listRental = RentalFacade.getClosed();
+		HttpStatus status = HttpStatus.OK;
+		GetResponseModel<List<RentalDTO>> response = new GetResponseModel<>(status.value(), "Rents successfully obtained !", listRental);
 		return new ResponseEntity<>(response, status);
 	}
 	

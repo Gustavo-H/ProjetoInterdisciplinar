@@ -40,4 +40,8 @@ public class UserService {
 			name = "";
 		return dao.getByName(name, jdbc);
 	}
+	
+	public List<User> getAll(JdbcTemplate jdbc) {	
+		return dao.getAll(jdbc);
+	}
 }

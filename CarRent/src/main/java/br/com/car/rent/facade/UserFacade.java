@@ -77,4 +77,13 @@ public class UserFacade {
 			throw new SQLException(e);
 		}
 	}
+	
+	public static List<User> getAll() throws SQLException {
+		try {
+			JdbcTemplate jdbc = DAOFactory.getConnection();
+			return userService.getAll(jdbc);
+		} catch (Exception e) {
+			throw new SQLException(e);
+		}
+	}
 }

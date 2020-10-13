@@ -56,6 +56,15 @@ public class UserController {
 		return new ResponseEntity<>(response, status);
 	}
 	
+	@GetMapping(path="/all")
+	public ResponseEntity<GetResponseModel<List<User>>> getAll() throws SQLException {
+		List<User> listUser = UserFacade.getAll();
+		HttpStatus status = HttpStatus.OK;
+		GetResponseModel<List<User>> response = new GetResponseModel<>(status.value(), "Users successfully obtained !", listUser);
+		return new ResponseEntity<>(response, status);
+	}
+	
+	
 	@GetMapping(path="/login/{login}")
 	public ResponseEntity<GetResponseModel<User>> getByLogin(@PathVariable("login") String login) throws SQLException {
 		User user = UserFacade.getByLogin(login);

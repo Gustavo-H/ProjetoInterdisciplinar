@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import br.com.car.rent.dao.DAOFactory;
 import br.com.car.rent.model.Car;
+import br.com.car.rent.model.CarDTO;
 import br.com.car.rent.service.CarService;
 
 public class CarFacade {
@@ -40,8 +41,8 @@ public class CarFacade {
 		}
 	}
 
-	public static Car getById(Integer carId) throws SQLException {
-		Car ret = null;
+	public static CarDTO getById(Integer carId) throws SQLException {
+		CarDTO ret = null;
 		try {
 			JdbcTemplate jdbc = DAOFactory.getConnection();
 			ret = carService.getById(carId, jdbc);
@@ -51,7 +52,7 @@ public class CarFacade {
 		}
 	}
 
-	public static List<Car> getByGroup(Integer groupId) throws SQLException {
+	public static List<CarDTO> getByGroup(Integer groupId) throws SQLException {
 		try {
 			JdbcTemplate jdbc = DAOFactory.getConnection();
 			return carService.getByGroup(groupId, jdbc);
@@ -60,7 +61,7 @@ public class CarFacade {
 		}
 	}
 
-	public static List<Car> getAll() throws SQLException {
+	public static List<CarDTO> getAll() throws SQLException {
 		try {
 			JdbcTemplate jdbc = DAOFactory.getConnection();
 			return carService.getAll(jdbc);
@@ -69,8 +70,29 @@ public class CarFacade {
 			throw new SQLException(e);
 		}
 	}
+	
+	public static List<Car> getAllEdit() throws SQLException {
+		try {
+			JdbcTemplate jdbc = DAOFactory.getConnection();
+			return carService.getAllEdit(jdbc);
 
-	public static Car getByCarPlate(String carPlate) throws SQLException {
+		} catch (Exception e) {
+			throw new SQLException(e);
+		}
+	}
+	
+	public static List<CarDTO> getAvailable() throws SQLException {
+		try {
+			JdbcTemplate jdbc = DAOFactory.getConnection();
+			return carService.getAvailable(jdbc);
+
+		} catch (Exception e) {
+			throw new SQLException(e);
+		}
+	}
+	
+	
+	public static CarDTO getByCarPlate(String carPlate) throws SQLException {
 		try {
 			JdbcTemplate jdbc = DAOFactory.getConnection();
 			return carService.getByCarPlate(carPlate, jdbc);

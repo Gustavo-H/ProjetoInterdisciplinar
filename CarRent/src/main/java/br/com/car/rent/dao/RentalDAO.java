@@ -29,12 +29,14 @@ public class RentalDAO implements IRentalDAO {
 	}
 
 	@Override
+	public void setReturnDate(Integer id, JdbcTemplate jdbc) {
+		jdbc.update("CALL sp_set_rental_return_date(?)", id);
+	}
+
+	@Override
 	public void insert(Rental r, JdbcTemplate jdbc) {
-		jdbc.update(
-				"INSERT INTO RENTAL(client_id, employee_id, car_id, discount, date_withdrawal, "
-						+ "expected_return_date, effective_return_date) VALUES(?, ?, ?, ?, ?, ?, ?)",
-				r.getClientId(), r.getEmployeeId(), r.getCarId(), r.getDiscount(), r.getDateWithdrawal(), r.getExpectedReturnDate(),
-				r.getEffectiveReturnDate());
+		jdbc.update("CALL sp_insert_rental(?, ?, ?, ?, ?, ?)", r.getClientId(), r.getEmployeeId(), r.getCarId(),
+				r.getDiscount(), r.getDailyCost(), r.getExpectedReturnDate());
 	}
 
 	@Override
@@ -42,13 +44,25 @@ public class RentalDAO implements IRentalDAO {
 		jdbc.update(
 				"UPDATE RENTAL SET client_id=?, employee_id=?, car_id=?, discount=?, date_withdrawal=?, "
 						+ "expected_return_date=?, effective_return_date=? WHERE RENTAL.id=?",
-						r.getClientId(), r.getEmployeeId(), r.getCarId(), r.getDiscount(), r.getDateWithdrawal(), r.getExpectedReturnDate(),
-						r.getEffectiveReturnDate(), r.getId());
+				r.getClientId(), r.getEmployeeId(), r.getCarId(), r.getDiscount(), r.getDateWithdrawal(),
+				r.getExpectedReturnDate(), r.getEffectiveReturnDate(), r.getId());
 	}
 
 	@Override
 	public List<Rental> getByEmployee(Integer employeeId, JdbcTemplate jdbc) {
 		return jdbc.query("SELECT * FROM RENTAL WHERE RENTAL.employee_id = " + employeeId, new RentalRowMapper());
+	}
+
+	@Override
+	public List<Rental> getOpen(JdbcTemplate jdbc) {
+		return jdbc.query(
+				"SELECT * FROM RENTAL WHERE RENTAL.date_withdrawal IS NOT null AND RENTAL.effective_return_date IS null",
+				new RentalRowMapper());
+	}
+
+	@Override
+	public List<Rental> getClosed(JdbcTemplate jdbc) {
+		return jdbc.query("SELECT * FROM RENTAL WHERE RENTAL.effective_return_date IS NOT null", new RentalRowMapper());
 	}
 
 	@Override

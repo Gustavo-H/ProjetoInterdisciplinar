@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.car.rent.facade.CarFacade;
 import br.com.car.rent.model.Car;
+import br.com.car.rent.model.CarDTO;
 import br.com.car.rent.model.ExceptionModel;
 import br.com.car.rent.model.GetResponseModel;
 import br.com.car.rent.model.ResponseModel;
@@ -45,35 +46,51 @@ public class CarController {
 	}
 	
 	@GetMapping(path="/{id}")
-	public ResponseEntity<GetResponseModel<Car>> getById(@PathVariable("id") @NotBlank(message="id is required") Integer carId) throws SQLException {
-		Car car = CarFacade.getById(carId);
+	public ResponseEntity<GetResponseModel<CarDTO>> getById(@PathVariable("id") @NotBlank(message="id is required") Integer carId) throws SQLException {
+		CarDTO car = CarFacade.getById(carId);
 		HttpStatus status = HttpStatus.OK;
-		GetResponseModel<Car> response = new GetResponseModel<>(status.value(), "Car successfully obtained !", car);
+		GetResponseModel<CarDTO> response = new GetResponseModel<>(status.value(), "Car successfully obtained !", car);
+		return new ResponseEntity<>(response, status);
+	}
+	
+	@GetMapping(path="/available")
+	public ResponseEntity<GetResponseModel<List<CarDTO>>> getAvailable() throws SQLException {
+		List<CarDTO> listCar = CarFacade.getAvailable();
+		HttpStatus status = HttpStatus.OK;
+		GetResponseModel<List<CarDTO>> response = new GetResponseModel<>(status.value(), "Car successfully obtained !", listCar);
 		return new ResponseEntity<>(response, status);
 	}
 	
 	@GetMapping(path="/all")
-	public ResponseEntity<GetResponseModel<List<Car>>> getAll() throws SQLException {
-		List<Car> listCar = CarFacade.getAll();
+	public ResponseEntity<GetResponseModel<List<CarDTO>>> getAll() throws SQLException {
+		List<CarDTO> listCar = CarFacade.getAll();
+		HttpStatus status = HttpStatus.OK;
+		GetResponseModel<List<CarDTO>> response = new GetResponseModel<>(status.value(), "Car successfully obtained !", listCar);
+		return new ResponseEntity<>(response, status);
+	}
+	
+	@GetMapping(path="/all/edit")
+	public ResponseEntity<GetResponseModel<List<Car>>> getAllEdit() throws SQLException {
+		List<Car> listCar = CarFacade.getAllEdit();
 		HttpStatus status = HttpStatus.OK;
 		GetResponseModel<List<Car>> response = new GetResponseModel<>(status.value(), "Car successfully obtained !", listCar);
 		return new ResponseEntity<>(response, status);
 	}
 	
 	@GetMapping(path="/plate/{carPlate}")
-	public ResponseEntity<GetResponseModel<Car>> getByCarPlate(@PathVariable("carPlate") String carPlate) throws SQLException {
-		Car car = CarFacade.getByCarPlate(carPlate);
+	public ResponseEntity<GetResponseModel<CarDTO>> getByCarPlate(@PathVariable("carPlate") String carPlate) throws SQLException {
+		CarDTO car = CarFacade.getByCarPlate(carPlate);
 		HttpStatus status = HttpStatus.OK;
-		GetResponseModel<Car> response = new GetResponseModel<>(status.value(), "Car successfully obtained !", car);
+		GetResponseModel<CarDTO> response = new GetResponseModel<>(status.value(), "Car successfully obtained !", car);
 		logger.info("CarController.get() - Exiting");
 		return new ResponseEntity<>(response, status);
 	}
 	
 	@GetMapping(path="/group/{groupId}")
-	public ResponseEntity<GetResponseModel<List<Car>>> getByGroup(@PathVariable("groupId") @NotBlank(message="id is required") Integer groupId) throws SQLException {
-		List<Car> listCar = CarFacade.getByGroup(groupId);
+	public ResponseEntity<GetResponseModel<List<CarDTO>>> getByGroup(@PathVariable("groupId") @NotBlank(message="id is required") Integer groupId) throws SQLException {
+		List<CarDTO> listCar = CarFacade.getByGroup(groupId);
 		HttpStatus status = HttpStatus.OK;
-		GetResponseModel<List<Car>> response = new GetResponseModel<>(status.value(), "Car successfully obtained !", listCar);
+		GetResponseModel<List<CarDTO>> response = new GetResponseModel<>(status.value(), "Car successfully obtained !", listCar);
 		return new ResponseEntity<>(response, status);
 	}
 	

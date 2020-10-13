@@ -70,6 +70,12 @@ public class UserDAO implements IUserDAO {
 		return jdbc.query("SELECT * FROM USER WHERE USER.name LIKE '%" + name + "%' AND USER.is_deleted=0;",
 				new UserRowMapper());
 	}
+	
+	@Override
+	public List<User> getAll(JdbcTemplate jdbc) {
+		return jdbc.query("SELECT * FROM USER WHERE USER.is_deleted=0;",
+				new UserRowMapper());
+	}
 
 	@Override
 	public User getByLogin(String login, JdbcTemplate jdbc) {
