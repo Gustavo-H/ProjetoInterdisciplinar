@@ -14,4 +14,5 @@ public interface ICarDAO {
 	public void update(Car c, JdbcTemplate jdbc);
 	public Car getByCarPlate(String carPlates, JdbcTemplate jdbc);
 	public List<Car> getByGroup(Integer groupID, JdbcTemplate jdbc);
+	public List<Car> getAvailable(JdbcTemplate jdbc);
 }

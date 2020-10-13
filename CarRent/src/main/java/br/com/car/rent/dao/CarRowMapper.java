@@ -17,7 +17,7 @@ public class CarRowMapper implements ResultSetExtractor<List<Car>> {
 		List<Car> listCar = new ArrayList<>();
 		while (rs.next()) {
 			listCar.add(new Car(rs.getInt("id"), rs.getString("car_plate"), rs.getString("model"), rs.getInt("brand"),
-					rs.getInt("color"), rs.getInt("group_id"), rs.getInt("year"), rs.getDouble("rent_price")));
+					rs.getInt("color"), rs.getInt("group_id"), rs.getInt("year"), rs.getDouble("rent_price"), rs.getInt("is_rented")));
 		}
 		return listCar;
 	}
@@ -26,7 +26,7 @@ public class CarRowMapper implements ResultSetExtractor<List<Car>> {
 
 		if (rs.next())
 			return new Car(rs.getInt("id"), rs.getString("car_plate"), rs.getString("model"), rs.getInt("brand"),
-					rs.getInt("color"), rs.getInt("group_id"), rs.getInt("year"), rs.getDouble("rent_price"));
+					rs.getInt("color"), rs.getInt("group_id"), rs.getInt("year"), rs.getDouble("rent_price"), rs.getInt("is_rented"));
 		else
 			return new Car();
 	}
