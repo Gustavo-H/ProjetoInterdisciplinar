@@ -8,13 +8,13 @@ public class RentalDTO implements Serializable {
 
 	Client client;
 	Employee employee;
-	Car car;
+	CarDTO car;
 	Rental rental;
 
 	public RentalDTO() {
 	}
 
-	public RentalDTO(Client client, Employee employee, Car car, Rental rental) {
+	public RentalDTO(Client client, Employee employee, CarDTO car, Rental rental) {
 
 		this.setCar(car);
 		this.setClient(client);
@@ -38,11 +38,11 @@ public class RentalDTO implements Serializable {
 		this.employee = employee;
 	}
 
-	public Car getCar() {
+	public CarDTO getCar() {
 		return car;
 	}
 
-	public void setCar(Car car) {
+	public void setCar(CarDTO car) {
 		this.car = car;
 	}
 	public Rental getRental() {
