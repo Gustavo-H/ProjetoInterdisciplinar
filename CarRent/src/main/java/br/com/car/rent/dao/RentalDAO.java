@@ -30,16 +30,13 @@ public class RentalDAO implements IRentalDAO {
 
 	@Override
 	public void setReturnDate(Integer id, JdbcTemplate jdbc) {
-		jdbc.update("UPDATE RENTAL SET effective_return_date = CURRENT_TIMESTAMP WHERE RENTAL.id = ?", id);
+		jdbc.update("CALL sp_set_rental_return_date(?)", id);
 	}
 
 	@Override
 	public void insert(Rental r, JdbcTemplate jdbc) {
-		jdbc.update(
-				"INSERT INTO RENTAL(client_id, employee_id, car_id, discount, date_withdrawal, "
-						+ "expected_return_date) VALUES(?, ?, ?, ?, ?, ?, ?)",
-				r.getClientId(), r.getEmployeeId(), r.getCarId(), r.getDiscount(), r.getDateWithdrawal(),
-				r.getExpectedReturnDate());
+		jdbc.update("CALL sp_insert_rental(?, ?, ?, ?, ?, ?)", r.getClientId(), r.getEmployeeId(), r.getCarId(),
+				r.getDiscount(), r.getDailyCost(), r.getExpectedReturnDate());
 	}
 
 	@Override
