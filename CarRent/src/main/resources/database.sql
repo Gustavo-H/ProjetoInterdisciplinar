@@ -142,6 +142,20 @@ BEGIN
 END //
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE sp_set_rental_return_date (IN rental_id INT)
+BEGIN
+	UPDATE RENTAL SET effective_return_date = CURRENT_TIMESTAMP WHERE RENTAL.id = rental_id;
+    
+    SET @id = (SELECT c.id as id from rental as r 
+               INNER JOIN car as c on r.car_id = c.id 
+               WHERE r.id = rental_id);
+    
+    UPDATE CAR SET is_rented=0 WHERE CAR.id = @id;
+END //
+DELIMITER ;
+
+
 
 -- INITIAL CHARGE
 
